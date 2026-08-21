@@ -101,7 +101,9 @@ public class EventMapper {
     private DeviceAddedEventAvro mapDeviceAdded(DeviceAddedEvent event) {
         return DeviceAddedEventAvro.newBuilder()
                 .setId(event.getId())
-                .setType(DeviceTypeAvro.valueOf(event.getType().name()))
+                .setType(DeviceTypeAvro.valueOf(
+                        event.getDeviceType().name()
+                ))
                 .build();
     }
 
