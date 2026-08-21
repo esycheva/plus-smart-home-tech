@@ -84,16 +84,16 @@ public class EventMapper {
 
     private Object toHubPayload(HubEvent event) {
         return switch (event.getType()) {
-            case DEVICE_ADDED_EVENT ->
+            case DEVICE_ADDED ->
                     mapDeviceAdded((DeviceAddedEvent) event);
 
-            case DEVICE_REMOVED_EVENT ->
+            case DEVICE_REMOVED ->
                     mapDeviceRemoved((DeviceRemovedEvent) event);
 
-            case SCENARIO_ADDED_EVENT ->
+            case SCENARIO_ADDED ->
                     mapScenarioAdded((ScenarioAddedEvent) event);
 
-            case SCENARIO_REMOVED_EVENT ->
+            case SCENARIO_REMOVED ->
                     mapScenarioRemoved((ScenarioRemovedEvent) event);
         };
     }
