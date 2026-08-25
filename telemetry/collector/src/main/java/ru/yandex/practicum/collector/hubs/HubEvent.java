@@ -27,7 +27,6 @@ import java.time.Instant;
 @Setter
 @ToString
 public abstract class HubEvent {
-    @NotBlank
     private String id;
 
     @NotBlank
