@@ -18,7 +18,7 @@ import ru.yandex.practicum.grpc.telemetry.event.*;
 @GrpcService
 @RequiredArgsConstructor
 public class EventServiceRpc extends CollectorControllerGrpc.CollectorControllerImplBase {
-    private final EventService eventService;
+    private final KafkaSenderService eventService;
 
     @Override
     public void collectSensorEvent(SensorEventProto request, StreamObserver<Empty> responseObserver) {

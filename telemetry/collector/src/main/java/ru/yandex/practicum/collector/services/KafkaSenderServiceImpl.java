@@ -19,7 +19,7 @@ import java.time.Duration;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EventServiceImpl implements EventService {
+public class KafkaSenderServiceImpl implements KafkaSenderService {
     private final Producer<String, SpecificRecordBase> producer;
 
     @Override
