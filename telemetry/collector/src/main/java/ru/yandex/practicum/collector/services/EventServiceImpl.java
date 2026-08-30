@@ -13,6 +13,8 @@ import ru.yandex.practicum.collector.mapper.HubMapper;
 import ru.yandex.practicum.collector.mapper.SensorMapper;
 import ru.yandex.practicum.collector.sensors.SensorEvent;
 
+import java.time.Duration;
+
 
 @Service
 @RequiredArgsConstructor
@@ -42,7 +44,8 @@ public class EventServiceImpl implements EventService {
 
     @PreDestroy
     public void destroy() {
-        producer.close();
+        producer.flush();
+        producer.close(Duration.ofSeconds(10));
         log.debug("Продюсер закрыт");
     }
 }
