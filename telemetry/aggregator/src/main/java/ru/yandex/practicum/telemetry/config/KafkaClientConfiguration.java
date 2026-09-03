@@ -2,6 +2,7 @@ package ru.yandex.practicum.telemetry.config;
 
 import org.apache.avro.specific.SpecificRecordBase;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -17,6 +18,7 @@ import ru.practicum.telemetry.TelemetryAvroSerializer;
 import java.util.Properties;
 
 @Configuration
+@EnableConfigurationProperties(KafkaProperties.class)
 public class KafkaClientConfiguration {
     @Bean
     public Producer<String, SpecificRecordBase> kafkaProducer(KafkaProperties kafkaProperties) {
