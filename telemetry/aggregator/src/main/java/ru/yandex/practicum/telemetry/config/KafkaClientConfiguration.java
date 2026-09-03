@@ -20,9 +20,9 @@ public class KafkaClientConfiguration {
 
     @Bean(destroyMethod = "close")
     public Producer<String, SpecificRecordBase> kafkaProducer(
-            @Value("${spring.kafka.bootstrap-servers}") String bootstrapServers,
-            @Value("${spring.kafka.producer.client-id:aggregator-producer}") String clientId,
-            @Value("${spring.kafka.producer.value-serializer}") String valueSerializer
+            @Value("${kafka.bootstrap-servers}") String bootstrapServers,
+            @Value("${kafka.producer.client-id:aggregator-producer}") String clientId,
+            @Value("${kafka.producer.value-serializer}") String valueSerializer
     ) {
         Properties properties = new Properties();
 
@@ -48,10 +48,10 @@ public class KafkaClientConfiguration {
 
     @Bean(destroyMethod = "close")
     public Consumer<String, SpecificRecordBase> kafkaConsumer(
-            @Value("${spring.kafka.bootstrap-servers}") String bootstrapServers,
-            @Value("${spring.kafka.consumer.client-id:aggregator-consumer}") String clientId,
-            @Value("${spring.kafka.consumer.group-id}") String groupId,
-            @Value("${spring.kafka.consumer.value-deserializer}") String valueDeserializer
+            @Value("${kafka.bootstrap-servers}") String bootstrapServers,
+            @Value("${kafka.consumer.client-id:aggregator-consumer}") String clientId,
+            @Value("${kafka.consumer.group-id}") String groupId,
+            @Value("${kafka.consumer.value-deserializer}") String valueDeserializer
     ) {
         Properties properties = new Properties();
 
