@@ -1,6 +1,7 @@
 package ru.yandex.practicum.telemetry.config;
 
 import org.apache.avro.specific.SpecificRecordBase;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -18,25 +19,12 @@ import java.util.Properties;
 @Configuration
 public class KafkaClientConfiguration {
     @Bean
-    public Producer<String, SpecificRecordBase> kafkaProducer() {
-        Properties config = new Properties();
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
-        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, TelemetryAvroSerializer.class.getName());
-        config.put(ProducerConfig.CLIENT_ID_CONFIG, "aggregator-producer");
-
-        return new KafkaProducer<>(config);
+    public Producer<String, SpecificRecordBase> kafkaProducer(KafkaProperties kafkaProperties) {
+        return new KafkaProducer<>(kafkaProperties.buildProducerProperties(null));
     }
 
     @Bean
-    public Consumer<String, SpecificRecordBase> kafkaConsumer() {
-        Properties config = new Properties();
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, SensorEventDeserializer.class.getName());
-        config.put(ConsumerConfig.CLIENT_ID_CONFIG, "aggregator-consumer");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "aggregator.group");
-
-        return new KafkaConsumer<>(config);
+    public Consumer<String, SpecificRecordBase> kafkaConsumer(KafkaProperties kafkaProperties) {
+        return new KafkaConsumer<>(kafkaProperties.buildConsumerProperties(null));
     }
 }
