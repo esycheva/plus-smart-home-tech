@@ -51,6 +51,7 @@ public class AggregationStarter {
                             SensorsSnapshotAvro snapshot = snapshotOpt.get();
                             ProducerRecord<String, SpecificRecordBase> snapshotRecord = new ProducerRecord<>(TelemetryTopics.TELEMETRY_SNAPSHOT_TOPIC, snapshot.getHubId(), snapshot);
                             producer.send(snapshotRecord);
+                            producer.flush();
                         }
                     }
                 }
