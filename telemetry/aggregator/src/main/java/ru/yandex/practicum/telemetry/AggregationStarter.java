@@ -41,6 +41,9 @@ public class AggregationStarter {
                 for (ConsumerRecord<String, SpecificRecordBase> record : records) {
                     SpecificRecordBase rawValue = record.value();
 
+                    log.trace("Обрабатываю сообщение от хаба {} из партиции {} со смещением: {}",
+                            record.key(), record.partition(), record.offset());
+
                     if (rawValue instanceof SensorEventAvro event) {
                         Optional<SensorsSnapshotAvro> snapshotOpt = snapshotFormer.updateState(event);
 
