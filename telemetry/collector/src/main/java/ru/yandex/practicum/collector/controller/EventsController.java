@@ -8,13 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.collector.hubs.HubEvent;
 import ru.yandex.practicum.collector.sensors.SensorEvent;
-import ru.yandex.practicum.collector.services.EventService;
+import ru.yandex.practicum.collector.services.KafkaSenderService;
 
 @RestController
 @RequestMapping(path = "/events")
 @RequiredArgsConstructor
 public class EventsController {
-    private final EventService eventService;
+    private final KafkaSenderService eventService;
 
     private static final Logger log = LoggerFactory.getLogger(EventsController.class);
 

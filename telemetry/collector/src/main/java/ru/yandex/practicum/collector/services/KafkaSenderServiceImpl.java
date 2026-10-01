@@ -13,11 +13,13 @@ import ru.yandex.practicum.collector.mapper.HubMapper;
 import ru.yandex.practicum.collector.mapper.SensorMapper;
 import ru.yandex.practicum.collector.sensors.SensorEvent;
 
+import java.time.Duration;
+
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EventServiceImpl implements EventService {
+public class KafkaSenderServiceImpl implements KafkaSenderService {
     private final Producer<String, SpecificRecordBase> producer;
 
     @Override
@@ -42,7 +44,8 @@ public class EventServiceImpl implements EventService {
 
     @PreDestroy
     public void destroy() {
-        producer.close();
+        producer.flush();
+        producer.close(Duration.ofSeconds(10));
         log.debug("Продюсер закрыт");
     }
 }
